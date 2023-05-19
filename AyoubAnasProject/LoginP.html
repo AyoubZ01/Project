@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+		}
+
+		h1 {
+			text-align: center;
+			margin-top: 50px;
+			color: #333;
+		}
+
+		form {
+			margin: auto;
+			max-width: 500px;
+			background-color: #180909;
+			padding: 50px;
+			border-radius: 10px;
+			box-shadow: 0px 2px 10px rgba(219, 221, 223, 0.925);
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			color: #333;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"] {
+			width: 100%;
+			padding: 10px;
+			border: 5px;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			box-sizing: border-box;
+		}
+
+		input[type="submit"] {
+			background-color: #D13439;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			margin-top: 20px;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #D13439;
+		}
+
+		.checkbox-label {
+    color: white; 
+  }
+
+		.password-wrapper {
+			position: relative;
+		}
+
+		.password-toggle {
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			transform: translateY(-50%);
+			cursor: pointer;
+		}
+
+		.password-toggle i {
+			font-size: 20px;
+			color: #333;
+		}
+
+		.password-toggle i:hover {
+			color: #D13439;
+		}
+
+		.signup-form {
+			margin-top: 50px;
+			text-align: center;
+			color: #333;
+		}
+
+		.signup-form label {
+			display: inline-block;
+			margin-right: 10px;
+		}
+		footer{
+    margin-top: 100px;
+    background-color: #D13439;
+    color: aliceblue;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+padding: 30px;
+border-radius: 5px;
+}
+footer .social_media {
+    display: flex;
+
+}
+footer .social_media p{
+    margin-right: 15px;
+}
+
+		.signup-form input[type="text"],
+		.signup-form input[type="email"],
+		.signup-form input[type="password"] {
+			width: 100%;
+			padding: 10px;
+			border: 5px;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body style="background-image: url('Jump.png');">
+
+	<form id="loginForm"  onsubmit="login(); return false;">
+		<label style="color: #f2f2f2;" for="email">Email:</label>
+		<input type="email" id="email" name="email" >
+
+		<div class="password-wrapper">
+			<label style="color: #f2f2f2;" for="password">Password:</label>
+			<input type="password" id="password">
+			<span id="sp2"; style="color: red; font-weight: bold;"></span><br>
+			<input type="checkbox" onclick="showPass()"><label class="checkbox-label">Show Password</label>
+			
+		
+			<input id="submitButton" type="submit" value="Login">
+		</form>
+		
+		<div class="signup-form">
+			<p style="color: #f2f2f2;">New member? <span style="font-weight: bolder;">Sign up now!</span> </p>
+			<form>
+				<label style="color: #f2f2f2;" for="name">Name:</label>
+				<input type="text" id="name" name="name" required>
+		
+				<label style="color: #f2f2f2;" for="age">Age:</label>
+				<input type="text" id="age" name="age" required>
+		
+				<label style="color: #f2f2f2;" for="email2">Email:</label>
+				<input type="email" id="email2" name="email2" required>
+		
+				<label style="color: #f2f2f2;" for="password2">Password:</label>
+				<input type="password" id="password2" name="password2" required>
+				<span id="sp1"; style="color: red; font-weight: bold;"></span>
+				<input type="submit" value="Sign up" onclick="add(); return false;">
+			
+			</form>
+		</div>
+		<footer>
+			<p>&copy;Contact Us: serviceinfo@gmail.com <br> Tel: 0524765909</p>
+			<div class="social_media">
+			<p> <i class="fab fa-facebook-f"></i></p>
+			<p> <i class="fab fa-instagram"></i></p>
+			<p> <i class="fab fa-twitter"></i></p>
+		</div>
+		</footer>
+		
+		<script>
+			var users =[{email:'user@gmail.com', password:'123AZERRTY'},
+		{
+			email:'user02@gmail.com', password:'QWERTY123'
+		}]
+		function showPass(){
+
+var passwordinp = document.getElementById('password');
+
+if(passwordinp.type == 'password'){
+    passwordinp.type = 'text'
+}else if(passwordinp.type == 'text'){
+    passwordinp.type = 'password'
+}
+}
+		
+	
+function add(){
+	event.preventDefault();
+
+ var email = document.getElementById('email2').value;
+var password = document.getElementById('password2').value;
+if(password.length<8){
+document.getElementById('sp1').innerHTML = "The password must contain 8 characters!";
+}
+else{
+var user = {};
+ user.email = email;
+user.password = password;
+users.push(user);
+
+ console.log(users)
+}
+}
+function login(){
+event.preventDefault(); 
+ var emaillog = document.getElementById('email').value;
+ var passwordlog = document.getElementById('password').value;
+if(emaillog==''){
+document.getElementById('sp2').innerHTML = "The Email must be filled out!";
+return false;
+}else if(passwordlog==''){
+document.getElementById('sp2').innerHTML = "The password must be filled out!";
+return false;
+ }
+ for(var i=0; i<users.length;i++){
+
+if(emaillog == users[i].email && passwordlog == users[i].password){
+	return true;
+}
+}
+
+
+
+
+document.getElementById('sp2').innerHTML = "The Email and Password do not match!";
+return false;
+}
+
+
+
+		</script>
+		
+
+</body>
+</html>

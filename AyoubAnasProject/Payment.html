@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="Paymentcss.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Confirm Your Payment</h1>
+        <div class="first-row">
+            <div class="owner">
+                <h3>Owner</h3>
+                <div class="input-field">
+                    <input type="text" id="ownerInput"  onsubmit="mustFill(); return false;">
+                    <span id="spn1"; style="color: red; font-weight: bold;"></span><br>
+                </div>
+            </div>
+            <div class="cvv">
+                <h3>CVV</h3>
+                <div class="input-field">
+                    <input type="text" name="cvv" id="cvvInput" maxlength="3" oninput="maxThreeDigits(event)">
+                    <span id="spn2"; style="color: red; font-weight: bold;"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="second-row">
+            <div class="card-number">
+                <h3>Card Number</h3>
+                <div class="input-field">
+                    <input type="text" name="cardNum" id="Num" oninput="cardNumbersMax(event)">
+                    <span id="spn3"; style="color: red; font-weight: bold;"></span><br>
+                </div>
+            </div>
+        </div>
+        <div class="third-row">
+            <h3>Expiration Date</h3>
+            <div class="selection">
+                <div class="date">
+                    <select name="months" id="months">
+                        <option value="Jan">Jan</option>
+                        <option value="Feb">Feb</option>
+                        <option value="Mar">Mar</option>
+                        <option value="Apr">Apr</option>
+                        <option value="May">May</option>
+                        <option value="Jun">Jun</option>
+                        <option value="Jul">Jul</option>
+                        <option value="Aug">Aug</option>
+                        <option value="Sep">Sep</option>
+                        <option value="Oct">Oct</option>
+                        <option value="Nov">Nov</option>
+                        <option value="Dec">Dec</option>
+                      </select>
+                      <select name="years" id="years">
+                        <option value="2020">2023</option>
+                        <option value="2019">2024</option>
+                        <option value="2018">2025</option>
+                        <option value="2017">2026</option>
+                        <option value="2016">2027</option>
+                        <option value="2015">2028</option>
+                      </select>
+                </div>
+                <div class="cards">
+                    <img src="Mastercard-logo.svg.png" alt="">
+                    <img src="VISA-logo.png" alt="">
+                    <img src="pp.png" alt="">
+                </div>
+            </div>    
+        </div>
+        <button id="bt" onclick="mustFill()">Confirm</button>
+    </div>
+    <script>
+        function cardNumbersMax(event) {
+          var input = event.target;
+          input.value = input.value.replace(/[^0-9]/g, '');
+          if (input.value.length > 16) {
+    input.value = input.value.slice(0,16);
+  }
+   
+        }
+        
+function maxThreeDigits(event) {
+  var input = event.target;
+  input.value = input.value.replace(/[^0-9]/g, '');
+  
+  if (input.value.length > 3) {
+    input.value = input.value.slice(0, 3);
+  }
+}
+  function mustFill(){
+event.preventDefault(); 
+ var owner = document.getElementById('ownerInput').value;
+ var cvv = document.getElementById('cvvInput').value;
+ var numC = document.getElementById('Num').value;
+if(owner==''){
+document.getElementById('spn1').innerHTML = "The name of the owner must be filled out!";
+return false;
+}else if(cvv==''){
+document.getElementById('spn2').innerHTML = "The Card Verification Value must be filled out!";
+return false;
+ }
+ else if(numC==''){
+document.getElementById('spn3').innerHTML = "The Card Number must be filled out!";
+return false;
+ }
+ window.location.href="SuccDone.html";
+}
+
+
+        </script>
+</body>
+</html>
